@@ -1,15 +1,40 @@
 {
-  "name": "vue-light-box",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-shadowboxer",
+  "version": "0.1.3",
+  "private": false,
+  "main": "./dist/vue-shadowbox.umd.js",
+  "author": "haweecodes <haweewes@gmail.com>",
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
+  "keywords": [
+    "vue",
+    "javascript",
+    "front-end",
+    "web",
+    "vuejs",
+    "lightbox"
+  ],
+  "description": "A simple lightbox for vue to view images",
+  "homepage": "https://github.com/haweecodes/vue-shadowbox",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haweecodes/vue-shadowbox"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-bundle": "vue-cli-service build --target lib --name vue-shadowbox ./src/main.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-shadowbox": "^0.1.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",

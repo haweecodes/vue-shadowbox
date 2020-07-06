@@ -1,29 +1,39 @@
 <template>
   <div id="app">
-    <button @click="visible = true">Click</button>
-    <vue-light :media="data" v-model="visible"></vue-light>
+    <button @click="visible = true">Open LightBox</button>
+    <vue-shadow-box :media="data" v-model="visible"></vue-shadow-box>
   </div>
 </template>
 
 <script>
-import VueLight from './LightBox.vue';
+import VueShadowBox from 'vue-shadowbox';
+import 'vue-shadowbox/dist/vue-shadowbox.css';
 
 export default {
   name: 'app',
   components: {
-    VueLight,
+    VueShadowBox,
   },
   data() {
     return {
-      visible: true,
+      visible: false,
       data: [
         {
           src: 'https://images.unsplash.com/photo-1593339365176-a5ef604bed6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=333&q=80',
           type: 'img',
-        },
-        {
-          src: 'https://images.unsplash.com/photo-1591877813825-e276030f6ed8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=333&q=80',
+          description: 'A picture with lots of story',
+        }, {
+          src: 'https://images.unsplash.com/photo-1593339365176-a5ef604bed6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=333&q=80',
           type: 'img',
+          description: 'A picture with lots of story',
+        }, {
+          src: 'https://images.unsplash.com/photo-1593339365176-a5ef604bed6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=333&q=80',
+          type: 'img',
+          description: 'A picture with lots of story',
+        }, {
+          src: 'https://images.unsplash.com/photo-1593339365176-a5ef604bed6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=333&q=80',
+          type: 'img',
+          description: 'A picture with lots of story',
         },
       ],
     };

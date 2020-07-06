@@ -1,17 +1,23 @@
 <template>
-    <div class="box_overlay" v-if="LVisibility" @click="exitOverlay($event)">
-      <div class="box_content">
+  <transition name="fade">
+    <div class="box_overlay" v-if="LVisibility">
+      <div class="box_content"  @click="exitOverlay($event)">
         <div class="arrow_content left">
-          <LeftArrow @click="changeContent($event, 0)"/>
+          <LeftArrow @click="changeContent($event, 0)"  v-show="currentPosition > 0"/>
         </div>
         <transition name="fade">
-          <img :src="currentImage.src" :alt="currentImage.description">
+          <div class="box_image_wrapper">
+            <img class="box_image" :src="currentImage.src" :alt="currentImage.description">
+            <span class="box_image_desc">{{currentImage.description}}</span>
+            <span class="box_image_count">{{currentPosition+1}}/{{arrLength}}</span>
+          </div>
         </transition>
         <div class="arrow_content right">
-          <RightArrow @click="changeContent($event, 1)"/>
+          <RightArrow @click="changeContent($event, 1)" v-show="currentPosition < arrLength-1"/>
         </div>
       </div>
     </div>
+  </transition>
 </template>
 
 <script>
@@ -62,6 +68,11 @@ export default {
       }
     });
   },
+  watch: {
+    visibility() {
+      this.LVisibility = this.visibility;
+    },
+  },
   methods: {
     changeContent(event, dir) {
       event.stopPropagation();
@@ -75,9 +86,13 @@ export default {
       this.currentImage = this.media[this.currentPosition];
     },
     exitOverlay(event) {
-      this.LVisibility = false;
+      this.reset();
       event.stopPropagation();
       this.$emit('click', false);
+    },
+    reset() {
+      this.currentPosition = 0;
+      this.LVisibility = false;
     },
   },
 };
@@ -93,21 +108,55 @@ export default {
   left: 0
   right: 0
   bottom: 0
-  background-color: rgba(0,0,0,0.4)
+  background-color: rgba(0,0,0,0.8)
   z-index: 5
-  cursor: pointer
   -webkit-user-select: none /* Safari */
   -ms-user-select: none /* IE 10+ and Edge */
   user-select: none /* Standard syntax */
   .box_content
+    height: 100%
+    width: 100%
     display: flex
     justify-content: space-between
     align-items: center
-    height: 100%
+    .arrow_content
+      position: static
+      cursor: pointer
+    .box_image_wrapper
+      max-width: 80vw
+      max-height: 80vh
+      .box_image
+        max-width: 80vw
+        max-height: 80vh
+    .box_image_count
+      color: white
+      display: block
+      text-align: right
+    .box_image_desc
+      color: white
+      display: block
+      text-align: center
 
-.fade-enter-active, .fade-leave-active
-  transition: opacity .5s
+.fade-enter-active
+  &.fade-leave-active
+    transition: opacity .5s
 
-.fade-enter, .fade-leave-to
-  opacity: 0
+.fade-enter
+  &.fade-leave-to
+    opacity: 0
+
+@media (max-width: 768px)
+  .box_content
+    justify-content: center !important
+    .arrow_content
+      position: absolute !important
+      &.right
+        right: 0
+      &.left
+        left: 0
+
+@media (max-width: 576px)
+    .box_image
+      width: 100vw
+
 </style>
